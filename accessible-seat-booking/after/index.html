@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Select seats - Book My Ticket (accessible version)</title>
+<style>
+  :root {
+    --text: #1f1f1f; --muted: #595959; --bg: #ffffff; --panel: #f1f3f4;
+    --primary: #0b57d0; --border: #6b6b6b; --error: #b3261e;
+    --error-bg: #fce8e6; --error-dark: #8c1d18; --taken: #dedede; --taken-text: #3c3c3c;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, Arial, sans-serif; font-size: 1rem;
+         line-height: 1.5; color: var(--text); background: var(--bg); }
+  .skip-link { position: absolute; left: 0.5rem; top: -4rem; padding: 0.5rem 1rem;
+               background: var(--text); color: #fff; z-index: 10; }
+  .skip-link:focus { top: 0.5rem; }
+  header, main { max-width: 46rem; margin: 0 auto; padding: 1rem; }
+  h1 { font-size: 1.75rem; margin: 0.5rem 0; }
+  h2 { font-size: 1.25rem; margin: 1.5rem 0 0.5rem; }
+  .hint { color: var(--muted); margin: 0.25rem 0 0.75rem; }
+  :focus-visible { outline: 3px solid #000; outline-offset: 2px; box-shadow: 0 0 0 5px #fff; }
+  .legend { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; margin: 0.5rem 0 1rem; }
+  .legend li { display: flex; align-items: center; gap: 0.5rem; }
+  .seat-row { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .seat { width: 2.75rem; height: 2.75rem; min-width: 24px; min-height: 24px;
+          border: 2px solid var(--border); border-radius: 0.375rem; background: var(--bg);
+          color: var(--text); font-size: 1.1rem; cursor: pointer; padding: 0; }
+  .seat .mark { visibility: hidden; }
+  .seat.is-selected { background: var(--primary); border-color: var(--primary); color: #fff; }
+  .seat.is-selected .mark { visibility: visible; }
+  .seat.is-unavailable { background: repeating-linear-gradient(45deg, var(--taken), var(--taken) 4px, #fff 4px, #fff 8px);
+                         color: var(--taken-text); cursor: not-allowed; }
+  .swatch { display: inline-block; width: 1.5rem; height: 1.5rem; border: 2px solid var(--border); border-radius: 0.25rem; text-align: center; line-height: 1.2rem; }
+  .swatch.sel { background: var(--primary); border-color: var(--primary); color: #fff; }
+  .swatch.taken { background: repeating-linear-gradient(45deg, var(--taken), var(--taken) 3px, #fff 3px, #fff 6px); }
+  .status { background: var(--panel); padding: 0.75rem 1rem; border-radius: 0.375rem; margin: 1rem 0; font-weight: 600; }
+  label { display: block; font-weight: 600; margin-top: 1rem; }
+  input { width: 100%; max-width: 24rem; padding: 0.6rem; font-size: 1rem; border: 2px solid var(--border); border-radius: 0.375rem; }
+  input[aria-invalid="true"] { border-color: var(--error); }
+  .error { color: var(--error); margin: 0.25rem 0 0; font-weight: 600; }
+  .error-summary { background: var(--error-bg); color: var(--error-dark); border: 2px solid var(--error); border-radius: 0.375rem; padding: 0.75rem 1rem; margin-bottom: 1rem; }
+  .error-summary a { color: var(--error-dark); }
+  button.primary { margin-top: 1.5rem; padding: 0.75rem 1.5rem; font-size: 1rem; font-weight: 600;
+                   color: #fff; background: var(--primary); border: 2px solid var(--primary); border-radius: 0.375rem; cursor: pointer; }
+  .confirmation { background: var(--panel); border-radius: 0.375rem; padding: 1rem; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to booking form</a>
+<header>
+  <p><strong>Book My Ticket</strong></p>
+</header>
+<main id="main">
+  <h1>Select your seats</h1>
+  <p class="hint">Evening show, Screen 2. Seats are &#8377;250 each.</p>
+
+  <div id="error-summary" class="error-summary" hidden>
+    <h2 id="error-heading" tabindex="-1">There is a problem</h2>
+    <ul id="error-list"></ul>
+  </div>
+
+  <form id="booking-form" novalidate>
+    <h2 id="seats-heading">Choose seats</h2>
+    <p id="seat-help" class="hint">Use the arrow keys to move between seats. Press Space or Enter to select or unselect a seat.</p>
+    <ul class="legend" aria-label="Seat legend">
+      <li><span class="swatch" aria-hidden="true"></span> Available</li>
+      <li><span class="swatch sel" aria-hidden="true">&#10003;</span> Selected</li>
+      <li><span class="swatch taken" aria-hidden="true"></span> Unavailable</li>
+    </ul>
+    <div id="seat-grid" role="group" aria-labelledby="seats-heading" aria-describedby="seat-help"></div>
+    <p id="seat-error" class="error"></p>
+    <p id="status" class="status" role="status"></p>
+
+    <h2>Your details</h2>
+    <label for="name">Full name</label>
+    <input id="name" name="name" type="text" autocomplete="name">
+    <p id="name-error" class="error"></p>
+
+    <label for="email">Email address</label>
+    <input id="email" name="email" type="email" autocomplete="email" inputmode="email">
+    <p id="email-error" class="error"></p>
+
+    <button type="submit" class="primary">Book selected seats</button>
+  </form>
+
+  <section id="confirmation" class="confirmation" hidden>
+    <h2 id="confirmation-heading" tabindex="-1">Booking confirmed</h2>
+    <p id="confirmation-text"></p>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

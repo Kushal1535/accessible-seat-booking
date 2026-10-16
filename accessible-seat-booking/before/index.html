@@ -1,0 +1,34 @@
+<html>
+<head>
+<title></title>
+<style>
+  * { outline: none; }
+  body { font-family: Arial; color: #aaaaaa; background: #ffffff; }
+  .title { font-size: 28px; }
+  .seat { width: 20px; height: 20px; display: inline-block; margin: 2px; background: #2e9e2e; }
+  .seat.taken { background: #d93025; }
+  .btn { display: inline-block; padding: 6px 12px; background: #7fb0ff; color: #ffffff; }
+  .err { color: #ff9999; }
+</style>
+</head>
+<body>
+<div class="title">Book My Ticket</div>
+<img src="poster.png">
+<h1>Select your seats</h1>
+<h4>Row A</h4>
+<div id="seat" class="seat" onclick="pick(this)"></div>
+<div id="seat" class="seat" onclick="pick(this)"></div>
+<div class="seat taken"></div>
+<div class="seat" onclick="pick(this)"></div>
+<div>Name</div>
+<input type="text" id="n">
+<div>Email</div>
+<input type="text" id="e" tabindex="5">
+<div class="btn" onclick="book()"><img src="cart.png"></div>
+<span id="msg" class="err"></span>
+<script>
+function pick(el){ el.style.background = '#0000ff'; }
+function book(){ document.getElementById('msg').innerText = 'Error!'; }
+</script>
+</body>
+</html>

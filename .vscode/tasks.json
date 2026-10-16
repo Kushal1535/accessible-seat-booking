@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run accessible seat booking",
+			"type": "shell",
+			"command": "python",
+			"args": [
+				"-m",
+				"http.server",
+				"8000",
+				"--directory",
+				"accessible-seat-booking"
+			],
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

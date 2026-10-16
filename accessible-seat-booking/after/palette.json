@@ -1,0 +1,18 @@
+{
+  "text": [
+    {"name": "body text on page",        "fg": "#1f1f1f", "bg": "#ffffff", "min": 4.5},
+    {"name": "muted text on page",       "fg": "#595959", "bg": "#ffffff", "min": 4.5},
+    {"name": "link / primary on page",   "fg": "#0b57d0", "bg": "#ffffff", "min": 4.5},
+    {"name": "button label",             "fg": "#ffffff", "bg": "#0b57d0", "min": 4.5},
+    {"name": "selected seat mark",       "fg": "#ffffff", "bg": "#0b57d0", "min": 4.5},
+    {"name": "unavailable seat mark",    "fg": "#3c3c3c", "bg": "#dedede", "min": 4.5},
+    {"name": "error text on page",       "fg": "#b3261e", "bg": "#ffffff", "min": 4.5},
+    {"name": "error text on summary",    "fg": "#8c1d18", "bg": "#fce8e6", "min": 4.5},
+    {"name": "status text on panel",     "fg": "#1f1f1f", "bg": "#f1f3f4", "min": 4.5}
+  ],
+  "ui": [
+    {"name": "seat border on page",      "fg": "#6b6b6b", "bg": "#ffffff", "min": 3.0},
+    {"name": "input border on page",     "fg": "#6b6b6b", "bg": "#ffffff", "min": 3.0},
+    {"name": "focus ring on page",       "fg": "#000000", "bg": "#ffffff", "min": 3.0}
+  ]
+}

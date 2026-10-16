@@ -1,0 +1,11 @@
+{
+  "text": [
+    {"name": "body text on page",   "fg": "#aaaaaa", "bg": "#ffffff", "min": 4.5},
+    {"name": "button label",        "fg": "#ffffff", "bg": "#7fb0ff", "min": 4.5},
+    {"name": "error text on page",  "fg": "#ff9999", "bg": "#ffffff", "min": 4.5}
+  ],
+  "ui": [
+    {"name": "available seat vs page", "fg": "#2e9e2e", "bg": "#ffffff", "min": 3.0},
+    {"name": "taken seat vs available seat (color only)", "fg": "#d93025", "bg": "#2e9e2e", "min": 3.0}
+  ]
+}
